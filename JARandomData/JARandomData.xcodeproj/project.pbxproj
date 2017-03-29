@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96012E6B1E4771FB00444121 /* NSObject+JARandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 96012E6A1E4771FB00444121 /* NSObject+JARandom.m */; };
+		966F90EC1E8BA41A00E80517 /* JARandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 966F90EB1E8BA41A00E80517 /* JARandom.m */; };
 		96AA40931E44C4E000DF851E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AA40921E44C4E000DF851E /* main.m */; };
 		96AA40961E44C4E000DF851E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AA40951E44C4E000DF851E /* AppDelegate.m */; };
 		96AA40991E44C4E000DF851E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AA40981E44C4E000DF851E /* ViewController.m */; };
@@ -17,8 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		96012E691E4771FB00444121 /* NSObject+JARandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JARandom.h"; sourceTree = "<group>"; };
-		96012E6A1E4771FB00444121 /* NSObject+JARandom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JARandom.m"; sourceTree = "<group>"; };
+		966F90EA1E8BA41A00E80517 /* JARandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JARandom.h; sourceTree = "<group>"; };
+		966F90EB1E8BA41A00E80517 /* JARandom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JARandom.m; sourceTree = "<group>"; };
 		96AA408E1E44C4E000DF851E /* JARandomData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JARandomData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AA40921E44C4E000DF851E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96AA40941E44C4E000DF851E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,8 +45,8 @@
 		96012E681E4771E000444121 /* Random */ = {
 			isa = PBXGroup;
 			children = (
-				96012E691E4771FB00444121 /* NSObject+JARandom.h */,
-				96012E6A1E4771FB00444121 /* NSObject+JARandom.m */,
+				966F90EA1E8BA41A00E80517 /* JARandom.h */,
+				966F90EB1E8BA41A00E80517 /* JARandom.m */,
 			);
 			name = Random;
 			sourceTree = "<group>";
@@ -165,7 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96AA40991E44C4E000DF851E /* ViewController.m in Sources */,
-				96012E6B1E4771FB00444121 /* NSObject+JARandom.m in Sources */,
+				966F90EC1E8BA41A00E80517 /* JARandom.m in Sources */,
 				96AA40961E44C4E000DF851E /* AppDelegate.m in Sources */,
 				96AA40931E44C4E000DF851E /* main.m in Sources */,
 			);
@@ -287,6 +287,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZEY359R7A4;
 				INFOPLIST_FILE = JARandomData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coder.JARandomData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -299,6 +300,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZEY359R7A4;
 				INFOPLIST_FILE = JARandomData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coder.JARandomData;
 				PRODUCT_NAME = "$(TARGET_NAME)";

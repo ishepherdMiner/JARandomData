@@ -7,6 +7,19 @@
 //
 
 #import "ViewController.h"
+#import "NSObject+JARandom.h"
+
+@interface JAModel : NSObject
+
+@property (nonatomic,copy) NSString *modelString;
+@property (nonatomic,assign) int modelInt;
+@property (nonatomic,strong) NSDate *modelData;
+
+@end
+
+@implementation JAModel
+
+@end
 
 @interface ViewController ()
 
@@ -16,14 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [JAModel randomData];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 
 @end

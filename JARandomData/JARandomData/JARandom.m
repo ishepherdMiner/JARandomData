@@ -6,42 +6,95 @@
 //  Copyright © 2017 Jason. All rights reserved.
 //
 
+#if DEBUG
+
 #import "JARandom.h"
 #import <objc/message.h>
 
+NSString *kNumericalField = @"[0-9]{4}";
+NSString *kAlphabetField = @"[a-zA-Z0-9]{8}";
+
 @interface JARandom ()
+
+@property (nonatomic,assign) JARandomStyle style;
+@property (nonatomic,copy) NSString *matcher;
 
 @end
 
 @implementation JARandom
 
-- (instancetype)initWithTableName:(NSString *)tableName {
-    if (self) {
-        self.tableName = tableName;
-    }
-    return self;
++ (instancetype)genWithName:(NSString *)tableName
+                      class:(Class)cls
+                       nums:(NSInteger)nums {
+    
+    return [self genWithName:tableName
+                       class:cls
+                        nums:nums
+                 randomStyle:JARandomStyleRegx
+                     matcher:@{
+                                @"numerical":kNumericalField,
+                                @"alphabet":kAlphabetField,
+                             }];
 }
 
-- (NSString *)randomStringWithModel:(id<JARandomDelegate>)model {
-    NSMutableString *ptString = [NSMutableString stringWithFormat:@"INSERT INTO"];
-    NSArray *pList = [self p_propertyList:false];
-    for (int i = 0; i < pList.count; ++i) {
++ (instancetype)genWithName:(NSString *)tableName
+                      class:(Class)cls
+                       nums:(NSInteger)nums
+                randomStyle:(JARandomStyle)style
+                    matcher:(id)matcher {
+    
+    JARandom *instance = [[self alloc] init];
+    instance.style = style;
+    instance.matcher = matcher;
+    
+    if (instance) {
+        NSAssert(tableName, @"You must transfer the tableName parameter");
         
+        instance.tableName = tableName;
+        
+        if (nums > 0) {
+            instance.insertSqlCmd = [instance generateStringWithClass:cls nums:nums];
+        }else {
+            instance.insertSqlCmd = [instance generateStringWithClass:cls nums:1];
+        }
+    }
+    return instance;
+}
+
+- (NSString *)generateStringWithClass:(Class)cls {
+    NSMutableString *ptString = [NSMutableString stringWithFormat:@"INSERT INTO %@",_tableName];
+    NSArray *pList = [self p_propertyList:false];
+    
+    id instance = [[cls alloc] init];
+    
+    for (int i = 0; i < pList.count; ++i) {
+        NSString *plistEle = pList[i];
+        if ([instance respondsToSelector:@selector(mapper)]) {
+            
+        }else {
+            
+            plistEle = [plistEle capitalizedString];
+            NSString *setString = [[@"set" stringByAppendingString:plistEle] stringByAppendingString:@":"];
+            SEL setSel = NSSelectorFromString(setString);
+            
+            // 判断类型
+            ((void (*)(id, SEL, id))(void *) objc_msgSend)(instance, setSel,@"123");
+        }
     }
     return ptString;
 }
 
-- (NSString *)randomStringWithModels:(NSArray <id<JARandomDelegate>>*) models {
+- (NSString *)generateStringWithClass:(Class)cls nums:(NSInteger)nums {
     NSMutableString *ptStrings = [NSMutableString string];
-    for (id<JARandomDelegate> model in models) {
-        [ptStrings appendFormat:@"%@", [self randomStringWithModel:model]];
+    for (int i = 0; i < nums; ++i) {
+        [ptStrings appendFormat:@"%@\n", [self generateStringWithClass:cls]];
     }
     return ptStrings;
 }
 
 #pragma mark - 运行时获取属性
 
-const void* propertiesKey = "com.coder.lldb-exclusive.propertiesKey";
+const void* propertiesKey = "com.coder.random.propertiesKey";
 
 /**
  运行时获取属性
@@ -80,7 +133,15 @@ const void* propertiesKey = "com.coder.lldb-exclusive.propertiesKey";
     objc_removeAssociatedObjects([self class]);
 }
 
-#pragma mark - 随机生成数据 
+#pragma mark - 利用正则表达式随机生成数据
+// http://www.paper.edu.cn/download/downPaper/200905-716
+// 论文: 基于正则语言的数据生成
 
+// http://dinosaur.compilertools.net/yacc/ yacc
+- (NSString *)randomString {
+    return @"123";
+}
 
 @end
+
+#endif

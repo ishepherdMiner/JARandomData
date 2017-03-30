@@ -6,34 +6,70 @@
 //  Copyright © 2017 Jason. All rights reserved.
 //
 
+#if DEBUG
+
 #import <Foundation/Foundation.h>
+
+typedef NS_ENUM(NSUInteger,JARandomStyle) {
+    JARandomStyleRegx,
+    JARandomStyleDb,
+};
 
 @protocol JARandomDelegate <NSObject>
 
+@optional
+- (NSDictionary *)mapper;
 
 @end
 
 @interface JARandom : NSObject
 
 @property (nonatomic,copy) NSString *tableName;
+@property (nonatomic,copy) NSString *createSqlCmd;
+@property (nonatomic,copy) NSString *insertSqlCmd;
 
-- (instancetype)initWithTableName:(NSString *)tableName;
+/// 已填充数据的对象数组
+@property (nonatomic,strong) NSArray *stub;
 
-/**
- 生成一条sqlite语句
-
- @param model 模型对象
- @return sqlite语句
- */
-- (NSString *)randomStringWithModel:(id<JARandomDelegate>)model;
-
++ (instancetype)genWithName:(NSString *)tableName
+                      class:(Class)cls
+                       nums:(NSInteger)nums;
 
 /**
- 生成一组sqlite语句
+ 随机生成符合规则的数据去填充若干条指定类型的记录
 
- @param models 模型对象数组
- @return 一组sqlite语句
+ @param tableName 表名
+ @param cls 类
+ @param nums 记录数
+ @param style 随机数据生成方式 [预定义数据库 | 正则表达式]
+ @param matcher 数据填充规则
+ @return JARandom对象
+ 
+ matcher 
+ 
+ 正则
+ {
+	numerical:@"[0-9]",       // 数值类型
+	alphabet:@"[a-zA-Z0-9]",  // 字符类型
+	property1:@""             // 指定属性的生成规则
+	property2:@""
+	...
+ },
+ 
+ 预定义随机数据库,先做这种
+ {
+    property1:@[@"a",@"b",@"c"]
+    property2:@[@"d",@"e",@"f"]
+    property3:@[@"g",@"h",@"i"]
+ },
+ 
  */
-- (NSString *)randomStringWithModels:(NSArray <id<JARandomDelegate>>*) models;
++ (instancetype)genWithName:(NSString *)tableName
+                      class:(Class)cls
+                       nums:(NSInteger)nums
+                randomStyle:(JARandomStyle)style
+                    matcher:(NSDictionary *)matcher ;
 
 @end
+
+#endif

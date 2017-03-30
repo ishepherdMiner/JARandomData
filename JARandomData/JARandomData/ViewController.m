@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "NSObject+JARandom.h"
+
+#if DEBUG
+    #import "JARandom.h"
+#endif
 
 @interface JAModel : NSObject
 
@@ -29,7 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [JAModel randomData];
+    JARandom *random = [JARandom generateWithName:@"ja_user" class:[JAModel class] nums:5];
+    NSLog(@"%@",random.createSqlCmd);
+    NSLog(@"%@",random.insertSqlCmd);
+    NSLog(@"%@",random.stub);
 }
 
 - (void)didReceiveMemoryWarning {

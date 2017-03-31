@@ -134,8 +134,38 @@ const void* propertiesKey = "com.coder.random.propertiesKey";
 // 论文: 基于正则语言的数据生成
 
 // http://dinosaur.compilertools.net/yacc/ yacc
-- (NSString *)randomString {
+- (NSString *)randomString:(NSString *)val {
+    
+    // 自定义规则
+    if ([self.matcher valueForKey:val]) {
+        
+        
+    }else if ([self.matcher valueForKey:@"alphabet"]) {
+        
+        // 1.获得正则规则
+        NSString *regx = [self.matcher valueForKey:@"alphabet"];
+        
+        // 2.解析规则生成树
+        
+        // 3.根据树生成具体的数据
+        
+    }else {
+        
+    }
     return @"123";
+}
+
+- (NSNumber *)randomNumber:(NSString *)val {
+    
+    // 自定义规则
+    if ([self.matcher valueForKey:val]) {
+        
+        
+    }else if ([self.matcher valueForKey:@"numerical"]) {
+        
+    }
+    
+    return nil;
 }
 
 @end

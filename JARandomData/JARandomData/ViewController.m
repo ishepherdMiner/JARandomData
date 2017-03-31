@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     JARandom *random = [JARandom genWithName:@"ja_user" class:[JAModel class] nums:5];
+    
     NSLog(@"%@",random.createSqlCmd);
     NSLog(@"%@",random.insertSqlCmd);
     NSLog(@"%@",random.stub);

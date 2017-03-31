@@ -16,8 +16,7 @@ NSString *kAlphabetField = @"[a-zA-Z0-9]{8}";
 
 @interface JARandom ()
 
-@property (nonatomic,assign) JARandomStyle style;
-@property (nonatomic,copy) NSString *matcher;
+@property (nonatomic,copy) NSDictionary *matcher;
 
 @end
 
@@ -30,7 +29,6 @@ NSString *kAlphabetField = @"[a-zA-Z0-9]{8}";
     return [self genWithName:tableName
                        class:cls
                         nums:nums
-                 randomStyle:JARandomStyleRegx
                      matcher:@{
                                 @"numerical":kNumericalField,
                                 @"alphabet":kAlphabetField,
@@ -40,11 +38,9 @@ NSString *kAlphabetField = @"[a-zA-Z0-9]{8}";
 + (instancetype)genWithName:(NSString *)tableName
                       class:(Class)cls
                        nums:(NSInteger)nums
-                randomStyle:(JARandomStyle)style
                     matcher:(id)matcher {
     
     JARandom *instance = [[self alloc] init];
-    instance.style = style;
     instance.matcher = matcher;
     
     if (instance) {

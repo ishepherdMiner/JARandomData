@@ -10,11 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger,JARandomStyle) {
-    JARandomStyleRegx,
-    JARandomStyleDb,
-};
-
 @protocol JARandomDelegate <NSObject>
 
 @optional
@@ -41,7 +36,6 @@ typedef NS_ENUM(NSUInteger,JARandomStyle) {
  @param tableName 表名
  @param cls 类
  @param nums 记录数
- @param style 随机数据生成方式 [预定义数据库 | 正则表达式]
  @param matcher 数据填充规则
  @return JARandom对象
  
@@ -56,7 +50,7 @@ typedef NS_ENUM(NSUInteger,JARandomStyle) {
 	...
  },
  
- 预定义随机数据库,先做这种
+ 预定义随机数据库,能力有限，先做这个
  {
     property1:@[@"a",@"b",@"c"]
     property2:@[@"d",@"e",@"f"]
@@ -67,7 +61,6 @@ typedef NS_ENUM(NSUInteger,JARandomStyle) {
 + (instancetype)genWithName:(NSString *)tableName
                       class:(Class)cls
                        nums:(NSInteger)nums
-                randomStyle:(JARandomStyle)style
                     matcher:(NSDictionary *)matcher ;
 
 @end
